@@ -1,0 +1,51 @@
+/*!
+ * \mainpage
+ *
+ * \section edits Edits to base code
+ *
+ * The following is a summary of all edits (with related motivation) done to 
+ * the base project code. **Line numbering for edited or removed parts
+ * is referred to the numbering in the original source files**.
+ *
+ * - <i>main.cpp:1-170</i>: subroutine definitions moved from main.cpp to
+ *   components.cpp. Shared global variables between main and other subroutines
+ *   are declared as external variables in components.hpp and defined in 
+ *   main.cpp.
+ *
+ * - <i>main.cpp:15-60</i>: static array substituted with dynamical ones
+ *
+ * - <i>main.cpp:99-134</i>: changed the mechanism for automatic rotation 
+ *   of the model (100-101, 108). Angle is no more updated inside display(void)
+ *   procedure, but inside update_angle(int) (which schedules a call to itself
+ *   with timing, managed with glutTimerFunc(void (func*)(int))) in order 
+ *   to have a smoother rotation which not interferes with other controls.
+ *   So the glutPostRedisplay(void) call at 133 is not needed anymore.
+ *
+ * - <i>main.cpp:189-191</i>: color conversion moved inside init_model(void).
+ * 
+ * \section features Features
+ * 
+ * - automatic model rotation, with customizable direction and rotation axis;
+ * - change rotation speed with '+' and '-' keys, start or stop with space key;
+ * - free rotation of the model dragging with mouse left button or keyboard
+ *   arrow keys;
+ * - automatic model scale on loading;
+ * - change zoom with PageDown and PageUp keys or with mouse scroll wheel 
+ *   (note that mouse scroll wheel is not supported on Mac OS X's default 
+ *   GLUT installation);
+ * - context menu on mouse right button:
+ *   + chose light: fixed respect to object or to observer;
+ *   + chose visual mode: verices, boundary edges, filled faces;
+ *   + chose rotation axis;
+ *   + enable or disable color (if present);
+ * - may contain traces of nuts or milk.
+ * 
+ * This viewer permits to open .ply model files generated with the base project.
+ * The command line interface at program's start asks a file to open, providing
+ * some default filenames. When loaded, the model rotates on its y axis: 
+ * rotation can be stopped or reactivated with space key, and the axis may be
+ * modified with the context menu. Zoom is set automatically on start, and may
+ * be regulated with the scroll wheel. The model may be freely rotated dragging
+ * with the mouse left button.
+ * 
+ */
